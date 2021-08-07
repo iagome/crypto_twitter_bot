@@ -10,14 +10,11 @@ defmodule CryptoTwitterBot do
   """
   def start do
     # roda a cada X minutos (preciso pesquisar como fazer isso)
-    with {:ok, slp} <- CryptoFetch.slp_info,
-         {:ok, axs} <- CryptoFetch.axs_info,
-         {:ok, eth} <- CryptoFetch.eth_info do
+    with {:ok, crypto} <- CryptoFetch.crypto_info do
       IO.puts("-----> Caught all prices, building tweet!")
+
     else
-      _ -> {:error, "Can't fetch prices"}
+      {:error, reason} -> IO.puts(reason)
     end
-
-
   end
 end
