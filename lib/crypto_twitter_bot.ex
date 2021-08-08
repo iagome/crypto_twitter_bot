@@ -11,7 +11,6 @@ defmodule CryptoTwitterBot do
     If the return is ok, tweets the prices, else shows error and doesn't tweet.
   """
   def start do
-    # roda a cada X minutos (preciso pesquisar como fazer isso)
     case CryptoFetch.crypto_info do
       {:ok, crypto} ->
         IO.puts("-----> Caught all prices, building tweet!")
