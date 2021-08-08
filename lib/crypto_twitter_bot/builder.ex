@@ -37,15 +37,19 @@ defmodule CryptoTwitterBot.Builder do
 
   defp format_to_currency(price, coin, _currency = "BRL") do
     case coin do
-      "SLP" -> Number.Currency.number_to_currency(price, unit: "R$", separator: ",", delimiter: ".", precision: 5)
-      _ -> Number.Currency.number_to_currency(price, unit: "R$", separator: ",", delimiter: ".")
+      "SLP" ->
+        Number.Currency.number_to_currency(price, unit: "R$", separator: ",", delimiter: ".", precision: 5)
+      _ ->
+        Number.Currency.number_to_currency(price, unit: "R$", separator: ",", delimiter: ".")
     end
   end
 
   defp format_to_currency(price, coin, _currency = "USD") do
     case coin do
-      "SLP" -> Number.Currency.number_to_currency(price, unit: "$", separator: ".", delimiter: ",", precision: 5)
-      _ -> Number.Currency.number_to_currency(price, unit: "$", separator: ".", delimiter: ",")
+      "SLP" ->
+        Number.Currency.number_to_currency(price, unit: "$", separator: ".", delimiter: ",", precision: 5)
+      _ ->
+        Number.Currency.number_to_currency(price, unit: "$", separator: ".", delimiter: ",")
     end
   end
 end
