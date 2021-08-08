@@ -24,7 +24,8 @@ defmodule CryptoTwitterBot.MixProject do
       {:httpoison, "~> 1.8"},
       {:extwitter, "~> 0.12"},
       {:oauther, git: "https://github.com/tobstarr/oauther.git", branch: "master", override: true},
-      {:jason, "~> 1.2"}
+      {:jason, "~> 1.2"},
+      {:number, "~> 1.0.1"}
     ]
   end
 end
