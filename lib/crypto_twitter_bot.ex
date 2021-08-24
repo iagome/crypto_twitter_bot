@@ -21,7 +21,8 @@ defmodule CryptoTwitterBot do
         |> ExTwitter.update()
 
         IO.puts("-----> Tweet successfully posted!")
-      {:error, reason} -> IO.puts(reason)
+      {:error, reason} ->
+        IO.puts(reason)
     end
   end
 
