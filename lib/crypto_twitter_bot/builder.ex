@@ -28,12 +28,8 @@ defmodule CryptoTwitterBot.Builder do
 
   defp get_price(data, coin, currency) do
     data[coin]["quote"][currency]["price"]
-    |> round_price(coin)
     |> format_to_currency(coin, currency)
   end
-
-  defp round_price(price, _coin = "SLP"), do: Float.round(price, 5)
-  defp round_price(price, _coin), do: Float.round(price, 2)
 
   defp format_to_currency(price, coin, _currency = "BRL") do
     case coin do
