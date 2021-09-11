@@ -4,34 +4,35 @@ defmodule CryptoTwitterBot.Builder do
   """
 
   @doc """
-  Builds the crypto prices map
+  Builds the crypto price map
   """
-  @spec build_prices(map, String.t()) :: map
-  def build_prices(data, currency) do
+  @spec get_price(map, String.t()) :: map
+  def get_price(data, coin) do
     %{
-      axs: get_price(data, "AXS", currency),
-      eth: get_price(data, "ETH", currency),
-      slp: get_price(data, "SLP", currency)
+      brl: price_by_currency(data, coin, "brl"),
+      usd: price_by_currency(data, coin, "usd"),
+      percentage: format_percentage(data)
     }
   end
 
   @doc """
   Builds the response for BRL and USD crypto prices
   """
-  @spec build_response(map, map) :: map
-  def build_response(crypto_brl, crypto_usd) do
+  @spec build_response(map, map, map) :: map
+  def build_response(slp_prices, eth_prices, axs_prices) do
     %{
-      brl: crypto_brl,
-      usd: crypto_usd
+      slp: slp_prices,
+      eth: eth_prices,
+      axs: axs_prices
     }
   end
 
-  defp get_price(data, coin, currency) do
-    data[coin]["quote"][currency]["price"]
+  defp price_by_currency(data, coin, currency) do
+    data["market_data"]["current_price"][currency]
     |> format_to_currency(coin, currency)
   end
 
-  defp format_to_currency(price, coin, _currency = "BRL") do
+  defp format_to_currency(price, coin, _currency = "brl") do
     case coin do
       "SLP" ->
         Number.Currency.number_to_currency(price, unit: "R$", separator: ",", delimiter: ".", precision: 5)
@@ -40,12 +41,17 @@ defmodule CryptoTwitterBot.Builder do
     end
   end
 
-  defp format_to_currency(price, coin, _currency = "USD") do
+  defp format_to_currency(price, coin, _currency = "usd") do
     case coin do
       "SLP" ->
         Number.Currency.number_to_currency(price, unit: "$", separator: ".", delimiter: ",", precision: 5)
       _ ->
         Number.Currency.number_to_currency(price, unit: "$", separator: ".", delimiter: ",")
     end
+  end
+
+  defp format_percentage(data) do
+    data["market_data"]["price_change_percentage_24h"]
+    |> Number.Percentage.number_to_percentage(precision: 2)
   end
 end

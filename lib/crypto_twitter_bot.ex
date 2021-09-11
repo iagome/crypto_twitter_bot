@@ -26,9 +26,15 @@ defmodule CryptoTwitterBot do
     end
   end
 
-  defp axs_prices(crypto), do: "$AXS: 🇺🇸 -> #{crypto.usd.axs} // 🇧🇷 -> #{crypto.brl.axs}\n"
+  defp axs_prices(crypto) do
+    "$AXS: 🇺🇸 -> #{crypto.axs.usd} // 🇧🇷 -> #{crypto.axs.brl} 📈 #{crypto.axs.percentage}\n"
+  end
 
-  defp eth_prices(crypto), do: "$ETH: 🇺🇸 -> #{crypto.usd.eth} // 🇧🇷 -> #{crypto.brl.eth}\n"
+  defp eth_prices(crypto) do
+    "$ETH: 🇺🇸 -> #{crypto.eth.usd} // 🇧🇷 -> #{crypto.eth.brl} 📈 #{crypto.eth.percentage}\n"
+  end
 
-  defp slp_prices(crypto), do: "$SLP: 🇺🇸 -> #{crypto.usd.slp} // 🇧🇷 -> #{crypto.brl.slp}"
+  defp slp_prices(crypto) do
+    "$SLP: 🇺🇸 -> #{crypto.slp.usd} // 🇧🇷 -> #{crypto.slp.brl} 📈 #{crypto.slp.percentage}"
+  end
 end

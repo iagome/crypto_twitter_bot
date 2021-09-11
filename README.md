@@ -1,5 +1,15 @@
 # CryptoTwitterBot
 
+A simple twitter bot that tweets the current price of crypto coins from [Axie Infinity](https://axieinfinity.com/).
+
 Follow at [@axie_crypto](https://twitter.com/axie_crypto)
 
-## TODO
+## Technologies and Dependencies
+
+* [Elixir 1.12](https://elixir-lang.org/)
+
+* [HTTPoison](https://github.com/edgurgel/httpoison)
+* [ExTwitter](https://github.com/parroty/extwitter)
+
+API used to get prices and percentages:
+* [CoinGecko](https://www.coingecko.com/)
